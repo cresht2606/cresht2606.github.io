@@ -1,0 +1,50 @@
+baseURL = "https://tmduc2606.github.io/"
+languageCode = "en-us"
+title = "Cresht Tran"
+copyright = "Cresht."
+theme = "diary"
+DefaultContentLanguage = "en"
+
+[params]
+subtitle = "When all that lies ahead is struggle, choose the path of greatest resistance"
+description = "Undergraduate of Computer Science at International University, VNU-HCM. Interests in NLP, Data Science/AI, and Data Engineering."
+enableGitalk = false
+enableGiscus = false
+enableOpenGraph = true
+enableTwitterCards = true
+
+[params.author]
+name = "Duc Tran Minh"
+email = "tmduc2606@gmail.com"
+
+[params.social]
+facebook = "https://www.facebook.com/tmduc2606/"
+linkedin = "https://www.linkedin.com/in/tmduc2606/"
+github = "https://github.com/tmduc2606"
+kaggle = "https://www.kaggle.com/cresht2606"
+
+[[menu.main]]
+url = "/"
+name = "Home"
+weight = 1
+
+[[menu.main]]
+url = "/academic/"
+name = "Academic"
+weight = 2
+
+[[menu.main]]
+url = "/projects/"
+name = "Projects"
+weight = 3
+
+[[menu.main]]
+url = "/contact/"
+name = "Contact"
+weight = 4
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+

@@ -1,0 +1,34 @@
+{{ define "main" }}
+
+    <div class="post-list-container post-list-container-no-background">
+        <div class="post">
+            {{ $featured_image := .Params.featured_image }}
+            {{ if $featured_image }}
+                {{ $image := .Resources.GetMatch (.Params.featured_image) }}
+                {{ if $image }}
+                <div class="post-head-wrapper" style="background-image: url('{{$image.RelPermalink }}')">
+                {{ else }}
+                <div class="post-head-wrapper" style="background-image: url('{{ $featured_image | absURL}}')">
+                {{ end }}
+                    <div class="post-head">
+                        <div class="post-title">
+                            {{ .Title }}
+                            {{ if .Params.description }}
+                            <div class="post-subtitle">
+                                {{ .Params.description }}
+                            </div>
+                            {{ end }}
+                        </div>
+                    </div>
+                </div>
+            {{ end }}
+            
+            <div class="post-body-wrapper">
+                <div class="post-body" v-pre>
+                    {{.Content}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{ end }}
