@@ -6,22 +6,25 @@ theme = "diary"
 DefaultContentLanguage = "en"
 
 [params]
-subtitle = "When all that lies ahead is struggle, choose the path of greatest resistance"
-description = "Undergraduate of Computer Science at International University, VNU-HCM. Interests in NLP, Data Science/AI, and Data Engineering."
-enableGitalk = false
-enableGiscus = false
-enableOpenGraph = true
-enableTwitterCards = true
+  subtitle = "When all that lies ahead is struggle, choose the path of greatest resistance"
+  description = "Undergraduate of Computer Science at International University, VNU-HCM. Interests in NLP, Data Science/AI, and Data Engineering."
+  enableGitalk = false
+  enableGiscus = false
+  enableReadingTime = true
+  enableOpenGraph = true
+  enableTwitterCards = true
+  walineServer = "https://waline-blog-rho-three.vercel.app/"
 
-[params.author]
-name = "Duc Tran Minh"
-email = "tmduc2606@gmail.com"
+  [params.waline]
+    emoji = ["//unpkg.com/@waline/emojis@latest/bilibili"]
+    requiredMeta = ["nick", "mail"]
 
 [params.social]
-facebook = "https://www.facebook.com/tmduc2606/"
-linkedin = "https://www.linkedin.com/in/tmduc2606/"
-github = "https://github.com/tmduc2606"
-kaggle = "https://www.kaggle.com/cresht2606"
+  email = "mailto:tmduc2606@gmail.com"
+  facebook = "https://www.facebook.com/tmduc2606/"
+  linkedin = "https://www.linkedin.com/in/tmduc2606/"
+  github = "https://github.com/tmduc2606"
+  kaggle = "https://www.kaggle.com/cresht2606"
 
 [[menu.main]]
 url = "/"
@@ -39,9 +42,14 @@ name = "Projects"
 weight = 3
 
 [[menu.main]]
+url = "/posts/"
+name = "Posts"
+weight = 4
+
+[[menu.main]]
 url = "/contact/"
 name = "Contact"
-weight = 4
+weight = 5
 
 [sitemap]
   changefreq = "always"
@@ -56,6 +64,7 @@ weight = 4
   [markup.highlight]
     style = "onedark"
     lineNos = false
+    codeFences = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
