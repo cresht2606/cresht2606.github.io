@@ -43,7 +43,19 @@ url = "/contact/"
 name = "Contact"
 weight = 4
 
+[sitemap]
+  changefreq = "always"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
 [markup]
+  [markup.highlight]
+    style = "onedark"
+    lineNos = false
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
