@@ -32,10 +32,18 @@
                         </time>
                         {{ end }}
 
-                        {{ if .Params.categories }}
+                        {{ $categories := .Params.categories }}
+                        {{ if $categories }}
                             <i class="material-icons" style="">folder</i>
-                                <a href="{{ "/categories/" | relLangURL }}{{ .Params.categories | urlize }}">{{ .Params.categories }}</a>
-                                &nbsp;
+                            {{ if eq (printf "%T" $categories) "[]string" }}
+                                {{ $first := index $categories 0 }}
+                                <a href="{{ "/categories/" | relLangURL }}{{ $first | urlize }}">
+                                    {{ delimit $categories ", " }}
+                                </a>
+                            {{ else }}
+                                <a href="{{ "/categories/" | relLangURL }}{{ $categories | urlize }}">{{ $categories }}</a>
+                            {{ end }}
+                            &nbsp;
                         {{ end }}
 
                         {{ if gt (len .Params.tags) 0 }}
