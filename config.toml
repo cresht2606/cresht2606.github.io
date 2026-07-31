@@ -6,7 +6,7 @@ theme = "diary"
 DefaultContentLanguage = "en"
 
 [params]
-  subtitle = "When all that lies ahead is struggle, choose the path of greatest resistance"
+  subtitle = "Computer Science Undergraduate | Aspiring Data Engineer | Data Pipelines, ETL & Analytics Engineering | PySpark, Airflow, dbt, SQL | Data Science & AI"
   description = "Undergraduate of Computer Science at International University, VNU-HCM. Interests in NLP, Data Science/AI, and Data Engineering."
   enableGitalk = false
   enableGiscus = false

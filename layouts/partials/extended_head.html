@@ -1,0 +1,13 @@
+<!-- Extended head: FontAwesome 6.x + custom styles -->
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer">
+
+{{ $customCss := resources.Get "css/custom.css" }}
+{{ if $customCss }}
+    {{ $customCss = $customCss | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $customCss.RelPermalink }}"
+          integrity="{{ $customCss.Data.Integrity }}"
+          media="screen">
+{{ end }}

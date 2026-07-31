@@ -1,8 +1,6 @@
 ---
-title: "Cresht Tran"
-description: "When all that lies ahead is struggle, choose the path of greatest resistance"
+title: "When all that lies ahead is struggle, choose the path of greatest resistance"
 date: 2026-07-30
-featured_image: "/images/banner.jpg"
 ---
 
 ![Duc Tran Minh](/images/avatar3.jpg)

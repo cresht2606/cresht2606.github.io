@@ -58,14 +58,18 @@ twikoo.init({
 {{ end }}
 
 {{ if .Site.Params.walineServer }}
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css">
 <div id="waline"></div>
-<script>
-    Waline.init({
+<script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+    init({
         el: '#waline',
-        serverURL: {{.Site.Params.walineServer}},
-        dark: "body.night",
-        emoji: {{ .Site.Params.waline.emoji | jsonify }},
-        requiredMeta: {{ .Site.Params.waline.requiredMeta | jsonify }},
+        serverURL: {{ .Site.Params.walineServer | jsonify | safeJS }},
+        dark: 'body.night',
+        lang: 'en',
+        emoji: {{ .Site.Params.waline.emoji | jsonify | safeJS }},
+        requiredMeta: {{ .Site.Params.waline.requiredMeta | jsonify | safeJS }},
+        reaction: false,
     });
 </script>
 {{ end }}

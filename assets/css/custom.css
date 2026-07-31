@@ -1,0 +1,125 @@
+/* ============================================================
+   Custom Styles — Duke's Portfolio (hugo-theme-diary overrides)
+   ============================================================ */
+
+/* ---------- Navigation: single active highlight ---------- */
+.nav-menu li.active {
+    border-left: 3px solid #3498db;
+    background-color: rgba(52, 152, 219, 0.08);
+}
+
+.nav-menu li.active a {
+    color: #3498db;
+    font-weight: 600;
+}
+
+/* Ensure only the active item shows the accent (covers any
+   theme rules that highlight siblings at the same time) */
+.nav-menu li:not(.active) {
+    border-left: 3px solid transparent;
+    background-color: transparent;
+}
+
+/* ---------- Home page: avatar reframing ---------- */
+.post-body img[alt="Duc Tran Minh"] {
+    max-width: 150px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto 1.5rem auto;
+}
+
+/* ---------- Projects: 2-column grid ---------- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg-color, #ffffff);
+    border: 1px solid rgba(128, 128, 128, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.project-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+}
+
+.project-info {
+    padding: 1.25rem 1.25rem 1.5rem;
+}
+
+.project-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.15rem;
+    line-height: 1.4;
+}
+
+.project-info p {
+    margin: 0.5rem 0;
+}
+
+.project-links {
+    margin: 0.75rem 0 0.25rem;
+}
+
+.project-links a {
+    margin-right: 1rem;
+    font-weight: 600;
+}
+
+.project-date {
+    display: block;
+    margin: 0.35rem 0;
+    font-size: 0.85rem;
+    opacity: 0.75;
+}
+
+/* Responsive: collapse to single column on mobile */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card img {
+        height: 180px;
+    }
+}
+
+/* ---------- Contact section: icons + emojis ---------- */
+.contact-icon {
+    margin-right: 0.5rem;
+    color: #3498db;
+    width: 1.2em;
+    text-align: center;
+}
+
+.post-body h2 .fas,
+.post-body h2 .fab {
+    margin-right: 0.35rem;
+    color: #3498db;
+}
+
+/* ---------- Posts section: year heading fix ---------- */
+.year {
+    color: var(--text-color, inherit) !important;
+    font-weight: bold;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+}
