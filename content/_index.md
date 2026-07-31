@@ -1,5 +1,5 @@
 ---
-title: "When all that lies ahead is struggle, choose the path of greatest resistance"
+title: "Duke Tran"
 date: 2026-07-30
 featured_image: "/images/banner.jpg"
 ---
