@@ -35,6 +35,9 @@
     font-weight: 400;
     letter-spacing: 0.02em;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    font-size: 0.95rem;
+    color: #999;
+    padding-left: 1.5rem;
 }
 
 .home-quote::before {
@@ -168,6 +171,12 @@
     letter-spacing: 0.05em;
     padding-bottom: 0.5rem;
     margin: 1.5rem 0 0.5rem 0;
+}
+
+/* ---------- Sidebar: make nav links scrollable when content overflows ---------- */
+.side-container .nav-link-list {
+    overflow-y: auto;
+    min-height: 0;
 }
 
 /* ---------- Dark mode overrides ---------- */
