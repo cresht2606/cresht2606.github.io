@@ -13,8 +13,6 @@
     font-weight: 600;
 }
 
-/* Ensure only the active item shows the accent (covers any
-   theme rules that highlight siblings at the same time) */
 .nav-menu li:not(.active) {
     border-left: 3px solid transparent;
     background-color: transparent;
@@ -116,10 +114,27 @@
     color: #3498db;
 }
 
-/* ---------- Posts section: year heading fix ---------- */
+/* ---------- Posts section: year heading (subtle gray separator) ---------- */
 .year {
-    color: var(--text-color, inherit) !important;
-    font-weight: bold;
-    font-size: 1.25rem;
-    letter-spacing: 0.02em;
+    color: #999 !important;
+    font-weight: 400;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+    padding-bottom: 0.5rem;
+    margin: 1.5rem 0 0.5rem 0;
+}
+
+/* ---------- Dark mode overrides ---------- */
+body.night .year {
+    color: #888 !important;
+    border-bottom-color: rgba(128, 128, 128, 0.15);
+}
+
+body.night .post-item-meta {
+    color: #aaa !important;
+}
+
+body.night .post-item-meta i {
+    color: #aaa !important;
 }
