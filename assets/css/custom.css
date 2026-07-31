@@ -120,7 +120,6 @@
     font-weight: 400;
     font-size: 1rem;
     letter-spacing: 0.05em;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
     padding-bottom: 0.5rem;
     margin: 1.5rem 0 0.5rem 0;
 }
@@ -128,7 +127,6 @@
 /* ---------- Dark mode overrides ---------- */
 body.night .year {
     color: #888 !important;
-    border-bottom-color: rgba(128, 128, 128, 0.15);
 }
 
 body.night .post-item-meta {
@@ -137,4 +135,63 @@ body.night .post-item-meta {
 
 body.night .post-item-meta i {
     color: #aaa !important;
+}
+
+/* ---------- Dark mode: project cards ---------- */
+body.night .project-card {
+    background: #282828;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.night .project-info h3 {
+    color: #e0e0e0;
+}
+
+body.night .project-info p {
+    color: #c8c8c8;
+}
+
+body.night .project-info a {
+    color: #5dade2;
+}
+
+body.night .project-date {
+    color: #a0a0a0;
+}
+
+/* ---------- Tags page ---------- */
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 2rem 0;
+}
+
+.tag-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: #3498db;
+    background: rgba(52, 152, 219, 0.08);
+    border: 1px solid rgba(52, 152, 219, 0.25);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.tag-pill:hover {
+    background: #3498db;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+body.night .tag-pill {
+    color: #5dade2;
+    background: rgba(52, 152, 219, 0.12);
+    border-color: rgba(52, 152, 219, 0.35);
+}
+
+body.night .tag-pill:hover {
+    background: #3498db;
+    color: #ffffff;
 }

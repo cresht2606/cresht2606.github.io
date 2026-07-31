@@ -6,7 +6,7 @@ theme = "diary"
 DefaultContentLanguage = "en"
 
 [pagination]
-  pagerSize = 2
+  pagerSize = 10
 
 [params]
   subtitle = "Computer Science Undergraduate | Aspiring Data Engineer | Data Pipelines, ETL & Analytics Engineering | PySpark, Airflow, dbt, SQL | Data Science & AI"
@@ -53,6 +53,11 @@ weight = 4
 url = "/contact/"
 name = "Contact"
 weight = 5
+
+[[menu.main]]
+url = "/tags/"
+name = "Tags"
+weight = 6
 
 [sitemap]
   changefreq = "always"
