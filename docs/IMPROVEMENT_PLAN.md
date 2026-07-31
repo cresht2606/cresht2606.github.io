@@ -1,4 +1,4 @@
-# Portfolio Improvement Plan v3
+# Portfolio Improvement Plan v4
 
 **Owner:** Duke's Portfolio (tmduc2606.github.io)
 **Date:** 2026-07-31
@@ -6,111 +6,92 @@
 
 ---
 
-## Issues Analysis (from screenshots + code review)
+## Issues Analysis
 
-### Bug 1: Lost "Contact" content
-**Screenshot:** `Screenshot from 2026-07-31 14-06-39.png` — content area is completely empty.
-**Root cause:** `section.html` only renders `.Content` inside the `{{ if $featured_image }}` block. Contact has no `featured_image`, so its body content is never rendered.
-**Fix:** Always render `.Content` for section pages. The banner/header should be conditional on `featured_image`, but the content body must always show.
+### Issue 1: Project card headline feels off
+**Screenshots:** `14-45-24.png`, `14-45-34.png` — card titles ("Thailand Domestic Tourism", "Vietnam Real Estate - Codename: Azeroth") appear as unstyled text above the image.
 
-### Bug 2: Projects section — no pagination indicators
-**Screenshot:** `14-06-16.png`, `14-06-23.png` — sidebar has only back-to-top + dark mode toggle, no page indicators.
-**Root cause:** Projects is a single section page with inline content (no child pages/posts to paginate). This is actually correct behavior — pagination only appears when there are multiple pages. However, the `pagerSize = 2` globally affects all list pages including Projects.
-**Fix:** This is a non-issue. Projects has no child pages, so no pagination is expected. If the user wants pagination for project cards, that would require converting projects to individual content files (out of scope).
+**Root cause:** In `content/projects/_index.md`, the `<h3>` title is a direct child of `.project-card`, rendered **above** the `<img>` — outside the `.project-info` div. The CSS rule `.project-info h3` only targets `<h3>` inside `.project-info`, so the actual title gets no styling. It renders as plain unstyled heading text floating above the image.
 
-### Bug 3: Redundant bar in "2026" year heading
-**Screenshot:** `14-06-28.png` — visible horizontal line under "2026".
-**Root cause:** CSS `.year { border-bottom: 1px solid rgba(128, 128, 128, 0.2); }` creates a visible separator line.
-**Fix:** Remove `border-bottom` from `.year` class. The year should be plain text, not a separator.
+**Current structure (broken):**
+```
+.project-card
+  ├── h3 (title)       ← bare, unstyled
+  ├── img              ← image
+  └── .project-info    ← links, date, description
+```
 
-### Bug 4: Posts pagination should be 10 per page
-**Current:** `pagerSize = 2` — only 2 posts per page.
-**Fix:** Change to `pagerSize = 10` for the Posts section.
+**Fix options:**
+1. **CSS-only:** Add `.project-card > h3` rule to style the title as an overlay inside the card (positioned at bottom over the image, like a card hero caption)
+2. **Markdown restructure:** Move `<h3>` inside `.project-info` so it appears below the image, properly styled
+3. **Hybrid:** Keep `<h3>` above image, style it as a card header band with background
 
-### Bug 5: Dark mode — Projects card text invisible
-**Screenshots:** `14-06-16.png`, `14-06-23.png` — card titles, dates, and descriptions are nearly invisible (white/light text on white card background).
-**Root cause:** Theme's `dark-mode.scss` sets `body.night .post-body *` and `body.night .post-list-container .post-item-wrapper *` colors, but `.project-card` elements are custom HTML inside `.post-body` and don't inherit these rules properly. The cards use `background: var(--bg-color, #ffffff)` which stays white in dark mode.
-**Fix:** Add dark mode overrides for `.project-card`:
-  - Card background → dark mode color
-  - Card text → light color
-  - Card border → subtle dark border
+**Recommended:** Option 1 — style the `<h3>` as an image overlay caption (bottom-left over the image), matching common portfolio card patterns. This keeps the visual hierarchy compact and modern.
 
-### Enhancement: Add Tags section
-**Reference:** `n-pham.github.io/blog/` shows a Tags page with pill-style tag buttons.
-**Fix:** Create `content/tags/_index.md` and add "Tags" to the menu. The theme already has taxonomy support (`[taxonomies] tag = "tags"`).
+### Issue 2: Enhance homepage banner quote
+**Screenshot:** `14-49-55.png` — banner title "When all that lies ahead is struggle, choose the path of greatest resistance" is plain white text on gradient overlay, no visual quote treatment.
+
+**Root cause:** The theme's `.post-head-wrapper .post-title` applies white color and gradient background, but no quote-specific styling (no quotation marks, no italic, no decorative elements).
+
+**Fix:** Add CSS to style the homepage banner title as a blockquote:
+- Opening/closing quotation marks via `::before`/`::after` pseudo-elements
+- Italic font style
+- Slightly increased letter-spacing for readability
+- Optional: subtle text-shadow for depth
 
 ---
 
 ## Implementation Plan
 
-### Phase 1: Fix Critical Bugs
+### Phase 1: Fix project card headline
 
-**1.1 Fix Contact content not rendering**
-- File: `layouts/_default/section.html`
-- Change: Move `.Content` rendering outside the `{{ if $featured_image }}` block
-- Structure:
-  ```
-  {{ if $featured_image }}
-    <!-- banner header -->
-  {{ end }}
-  {{ .Content }}   ← always render
-  {{ range .Paginator.Pages... }}
-    <!-- post items -->
-  {{ end }}
-  ```
-
-**1.2 Fix year heading redundant bar**
+**1.1 Add CSS for `.project-card > h3`**
 - File: `assets/css/custom.css`
-- Change: Remove `border-bottom` from `.year` class
-- Before: `border-bottom: 1px solid rgba(128, 128, 128, 0.2);`
-- After: Remove the line entirely
-
-**1.3 Fix Posts pagination to 10 per page**
-- File: `config.toml`
-- Change: `pagerSize = 2` → `pagerSize = 10`
-
-### Phase 2: Fix Dark Mode
-
-**2.1 Projects card dark mode**
-- File: `assets/css/custom.css`
-- Add dark mode overrides:
+- Style the `<h3>` as an overlay caption positioned at the bottom of the image:
   ```css
-  body.night .project-card {
-      background: #282828;
-      border-color: rgba(255, 255, 255, 0.1);
-  }
-  body.night .project-info h3,
-  body.night .project-info p,
-  body.night .project-date {
-      color: #e0e0e0;
-  }
-  body.night .project-info a {
-      color: #5dade2;
+  .project-card > h3 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 1.25rem 1rem;
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+      z-index: 1;
   }
   ```
+- Also update `.project-card` to add `position: relative` (needed for absolute positioning of `<h3>`)
+- Add dark mode override: ensure text stays white in dark mode
 
-**2.2 General dark mode text fixes**
-- Ensure `.post-body` content in sections renders with correct dark mode colors
+### Phase 2: Enhance homepage banner quote
 
-### Phase 3: Add Tags Section
-
-**3.1 Create Tags page**
-- File: `content/tags/_index.md`
-- Content: Frontmatter only (title: "Tags"), Hugo auto-generates taxonomy list
-
-**3.2 Add to navigation**
-- File: `config.toml`
-- Add menu entry:
-  ```toml
-  [[menu.main]]
-  url = "/tags/"
-  name = "Tags"
-  weight = 6
-  ```
-
-**3.3 Style Tags page**
+**2.1 Add quote styling to `.post-head-wrapper .post-title`**
 - File: `assets/css/custom.css`
-- Add tag pill styles matching reference site (rounded pills with count)
+- Add decorative quote marks and italic styling:
+  ```css
+  .post-head-wrapper .post-title {
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  .post-head-wrapper .post-title::before {
+      content: "\201C";   /* left double quote */
+      margin-right: 0.3em;
+      font-size: 1.2em;
+      opacity: 0.6;
+  }
+  .post-head-wrapper .post-title::after {
+      content: "\201D";   /* right double quote */
+      margin-left: 0.3em;
+      font-size: 1.2em;
+      opacity: 0.6;
+  }
+  ```
+- Add dark mode override if needed (theme already handles `.post-head-wrapper *` color)
 
 ---
 
@@ -118,21 +99,15 @@
 
 | File | Change |
 |---|---|
-| `layouts/_default/section.html` | Always render `.Content`, not just with `featured_image` |
-| `assets/css/custom.css` | Remove `.year` border-bottom; add dark mode overrides for project cards; add tag styles |
-| `config.toml` | Change `pagerSize` to 10; add Tags menu entry |
-| `content/tags/_index.md` | **NEW** — Tags taxonomy page |
+| `assets/css/custom.css` | Add `.project-card > h3` overlay styles; add `.post-head-wrapper .post-title` quote styling |
 
 ---
 
 ## Verification Checklist
 
-- [ ] Contact page shows content (email, social links)
-- [ ] Projects page shows content with banner
-- [ ] Year heading "2026" has no horizontal bar
-- [ ] Posts section shows 10 posts per page
-- [ ] Projects cards readable in dark mode (text visible, card background dark)
-- [ ] Tags page renders with all tags as pills
-- [ ] Tags added to navigation menu
+- [ ] Project card titles overlay the image at bottom (not plain text above)
+- [ ] Project card titles readable in both light and dark modes
+- [ ] Homepage banner shows quotation marks around the title
+- [ ] Banner title has italic styling and text shadow
+- [ ] No visual regressions on other pages
 - [ ] Build passes with 0 errors
-- [ ] All pages render correctly in both light and dark modes
