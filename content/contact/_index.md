@@ -9,7 +9,7 @@ comment: false
 
 The best way to contact me for business is to send an email via
 
-<p class="contact-item"><i class="fa-solid fa-envelope contact-icon"></i> [tmduc2606@gmail.com](mailto:tmduc2606@gmail.com)</p>
+<p class="contact-item"><i class="fa-solid fa-envelope contact-icon"></i> <a href="mailto:tmduc2606@gmail.com">tmduc2606@gmail.com</a></p>
 
 ## 🔗 Social Links
 
